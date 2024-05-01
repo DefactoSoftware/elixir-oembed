@@ -1,7 +1,7 @@
 defmodule OEmbed.Mixfile do
   use Mix.Project
 
-  @version "0.4.1"
+  @version "0.4.2"
 
   def project do
     [
@@ -41,7 +41,7 @@ defmodule OEmbed.Mixfile do
       {:httpoison, ">= 0.9.0"},
       {:floki, ">= 0.24.0"},
       {:poison, ">= 1.5.0"},
-      {:exconstructor, ">= 1.0.0"},
+      {:exconstructor, "~> 1.2.13"},
       {:exvcr, "~> 0.12", only: :test},
       {:inch_ex, ">= 0.0.0", only: :docs},
       {:earmark, ">= 0.0.0", only: :dev},
