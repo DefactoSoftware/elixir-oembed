@@ -14,12 +14,11 @@ defmodule OEmbed.Provider do
 
       @behaviour OEmbed.Provider
       @default_opts [follow_redirect: true, ssl: [{:versions, [:"tlsv1.2"]}]]
-      @request_opts Application.compile_env(:oembed, :request_opts, [])
 
       defp get_oembed(url) do
         opts =
           @default_opts
-          |> Keyword.merge(@request_opts)
+          |> Keyword.merge(request_opts())
 
         with {:ok, %HTTPoison.Response{body: body}} <-
                HTTPoison.get(url, [], opts),
@@ -30,6 +29,8 @@ defmodule OEmbed.Provider do
           _ -> {:error, "oEmbed url not found"}
         end
       end
+
+      defp request_opts, do: Application.get_env(:oembed, :request_opts, [])
 
       defp get_resource(%{"type" => "link"} = struct), do: Link.new(struct)
       defp get_resource(%{"type" => "photo"} = struct), do: Photo.new(struct)
