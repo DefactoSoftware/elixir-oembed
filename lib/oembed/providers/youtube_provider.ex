@@ -10,7 +10,10 @@ defmodule OEmbed.YoutubeProvider do
   Check if this provider supports given URL.
   """
   def provides?(url) do
-    Regex.match?(~r/(?:(?:\?|&)(?:v|list)=|v\/|youtu\.be\/)((?!videoseries)[a-zA-Z0-9_]*)/, url)
+    Regex.match?(
+      ~r/(?:(?:\?|&)(?:v|list)=|(v|shorts)\/|youtu\.be\/)((?!videoseries)[a-zA-Z0-9_]*)/,
+      url
+    )
   end
 
   @doc """

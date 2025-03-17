@@ -38,6 +38,7 @@ defmodule OEmbed.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:hackney, "~> 1.21.0", override: true},
       {:httpoison, ">= 0.9.0"},
       {:floki, ">= 0.24.0"},
       {:poison, ">= 1.5.0"},
