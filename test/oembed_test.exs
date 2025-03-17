@@ -54,6 +54,19 @@ defmodule OEmbedTest do
     end
   end
 
+  test "gets video oembed for valid youtube shorts url" do
+    use_cassette "youtube_shorts_valid" do
+      {:ok, %Video{} = oembed} = OEmbed.for("https://youtube.com/shorts/_HvsxuM7ljs")
+      assert oembed.html =~ "<iframe"
+    end
+  end
+
+  test "gets error response for invalid youtube shorts id" do
+    use_cassette "youtube_shorts_invalid" do
+      {:error, _} = OEmbed.for("https://www.youtube.com/shorts/invalid__id")
+    end
+  end
+
   test "gets rich oembed for valid instagram url" do
     use_cassette "instagram_valid" do
       {:ok, %Rich{} = oembed} = OEmbed.for("https://www.instagram.com/p/BaOHwvclrzJ/")
